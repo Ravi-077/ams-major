@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <!-- LEFT SECTION -->
+        <div class="left-panel">
+            <h2>Admin IQ</h2>
+           <h2><p>Academic Management System</p></h2> 
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="right-panel">
+
+            <h2>Login</h2>
+            
+            <div th:if="${param.pending}" class="alert-pending">
+                <i class="fas fa-info-circle"></i> 
+                <span>Your account is waiting for Admin approval. Please check back later!</span>
+            </div>
+            <form th:action="@{/login}" method="post" >
+
+                <div class="input-group">
+                    <label>Email</label>
+                    
+                    
+                    <input type="email" name="email" required placeholder="Enter Email"> 
+    
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter Password">                </div>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <!-- <button type="submit" class="login-btn">
+                    Login
+                </button> -->
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <br>
+            <div class="register-link">
+                <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+            </div>
+           
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

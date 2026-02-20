@@ -1,0 +1,143 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" th:href="@{/css/Admin-desh.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">Admin IQ</div>
+
+        <ul class="menu">
+            <li class="active">Dashboard</li>
+            <li>Student Management</li>
+            <li>Teacher Management</li>
+            <li>Course Management</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- TOP NAVBAR -->
+        <div class="topbar">
+
+            <input type="text" placeholder="Search Students, Courses..." id="searchInput">
+
+            <div class="top-right">
+                <div class="bell">🔔</div>
+
+                <div class="admin-profile">
+                    <strong id="adminName" th:text="${userName}">UserName</strong>
+                    <small id="adminEmail" th:text="${userEmail}">UserMailId</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <h4>
+                <p>Welcome back, <span id="welcomeName" th:text="${userName}">User</span>. Here is your academic overview</p>
+            </h4>
+        </div>
+
+        <!-- STATS SECTION -->
+        <div class="stats">
+
+            <div class="card">
+                <h3>Total Students</h3>
+                <h2 id="totalStudents">2845</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Teachers</h3>
+                <h2 id="totalTeachers">186</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Courses</h3>
+                <h2 id="totalCourses">312</h2>
+            </div>
+
+            <div class="card">
+                <h3>Active Sessions</h3>
+                <h2 id="activeSessions">42</h2>
+            </div>
+
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+            <div class="action-box" id="addTeacherBtn">
+                ➕ Add New Teacher
+            </div>
+
+            <div class="action-box secondary" id="studentReportBtn">
+                📄 Student Report
+            </div>
+        </div>
+
+        <!-- STUDENT LIST -->
+        <div class="student-section">
+
+            <div class="student-header">
+                <h2>Student List</h2>
+                <a href="#" id="viewAllStudents">View All</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll Number</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <!-- IMPORTANT: tbody id added for database -->
+                <tbody id="studentTableBody">
+
+                    <tr>
+                        <td>Rahul Prajapati</td>
+                        <td>CS-2026-1140</td>
+                        <td>Computer Science</td>
+                        <td class="active-status">Active</td>
+                        <td>✏️ 🗑️</td>
+                    </tr>
+
+                    <tr>
+                        <td>Rohit Sholanki</td>
+                        <td>CS-2026-1176</td>
+                        <td>Computer Science</td>
+                        <td class="active-status">Active</td>
+                        <td>✏️ 🗑️</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* Animated Background */
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#1e3a8a,#0f1b3d,#2563eb,#1e40af);
+    background-size:400% 400%;
+    animation:gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Login Box */
+.login-box{
+    width:350px;
+    padding:40px 30px;
+    border-radius:15px;
+    backdrop-filter:blur(15px);
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    text-align:center;
+    color:white;
+}
+
+.login-box h2{
+    margin-bottom:25px;
+}
+
+.login-box h2 i{
+    color:#ffb703;
+    margin-right:8px;
+}
+
+/* Input Group */
+.input-group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-group i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#ffb703;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+    font-size:14px;
+}
+
+/* Buttons */
+.login-btn{
+    width:100%;
+    padding:12px;
+    background:#ffb703;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+     text-decoration:none;
+}
+
+.login-btn:hover{
+    background:#ffc933;
+}
+
+.home-btn{
+    display:block;
+    margin-top:15px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.home-btn:hover{
+    color:#ffb703;
+}

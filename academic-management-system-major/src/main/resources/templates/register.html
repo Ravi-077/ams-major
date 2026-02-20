@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Admin IQ</title>
+    <link rel="stylesheet" href="/css/register.css">
+
+  
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="register-box">
+
+        <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+        <p class="subtitle">Register to access Admin IQ Portal</p>
+
+        
+        <form th:action="@{/register}" method="post">
+
+           
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" 
+                       name="name" 
+                       placeholder="Full Name" 
+                       required>
+            </div>
+
+           
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" 
+                       name="email" 
+                       placeholder="Email Address" 
+                       required>
+            </div>
+
+           
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" 
+                       name="password" 
+                       placeholder="Password" 
+                       required>
+            </div>
+
+           
+            <div class="input-group">
+                <i class="fas fa-user-tag"></i>
+                <select name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="STUDENT">Student</option>
+                    <option value="TEACHER">Teacher</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-btn">
+                <i class="fas fa-check-circle"></i> Register
+            </button>
+
+            <div class="login-link">
+                Already have an account?
+                <a th:href="@{/login}">Login here</a>
+            </div>
+
+        </form>
+       <div th:if="${registrationSuccess}" class="alert alert-success">
+    <i class="fas fa-clock"></i> Registration successful! Please wait for Admin approval.
+</div>
+
+<div th:if="${error}" class="alert alert-danger">
+    <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

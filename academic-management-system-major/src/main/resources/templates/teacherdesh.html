@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard</title>
+<link rel="stylesheet" href="teacherdesh.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+    <h1>
+        <i class="fas fa-chalkboard-teacher"></i>
+        Welcome, <span id="teacherName">Teacher</span> 👋
+    </h1>
+</header>
+
+<section class="dashboard">
+
+    <!-- RESPONSIBILITIES -->
+
+    <div class="card">
+        <i class="fas fa-pen"></i>
+        <h3>Add Marks</h3>
+        <p>Enter student marks into system</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-edit"></i>
+        <h3>Update Marks</h3>
+        <p>Modify existing marks</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Mark Attendance</h3>
+        <p>Update daily attendance</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-users"></i>
+        <h3>View Student List</h3>
+        <p>See all assigned students</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-search"></i>
+        <h3>Search Students</h3>
+        <p>Find student by name or roll</p>
+    </div>
+
+    <!-- NOTICE -->
+    <a href="notice.html" class="card notice-card">
+        <i class="fas fa-bell"></i>
+        <h3>Notice</h3>
+        <p>Click to view announcements</p>
+    </a>
+
+</section>
+
+<!-- PERMISSION INFO -->
+
+<section class="permissions">
+    <h2><i class="fas fa-shield-alt"></i> Teacher Permissions</h2>
+
+    <div class="permission-box allowed">
+        <h4>✔ Teacher Can:</h4>
+        <ul>
+            <li>Add Marks</li>
+            <li>Update Marks</li>
+            <li>Mark Attendance</li>
+            <li>View Student List</li>
+            <li>Search Students</li>
+        </ul>
+    </div>
+
+    <div class="permission-box restricted">
+        <h4>❌ Teacher Cannot:</h4>
+        <ul>
+            <li>Delete System</li>
+            <li>Create Admin</li>
+            <li>Manage Roles</li>
+        </ul>
+    </div>
+</section>
+
+<!-- HOME BUTTON -->
+
+<div class="home-section">
+    <a href="home.html" class="home-btn">
+        <i class="fas fa-home"></i> Go to Home
+    </a>
+</div>
+
+</body>
+</html>

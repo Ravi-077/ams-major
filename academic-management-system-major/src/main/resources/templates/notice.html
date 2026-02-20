@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Announcements</title>
+<link rel="stylesheet" href="notice.css">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="announcement-header">
+    <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="notice-container">
+
+    <!-- STUDENT NOTICE SECTION -->
+    <div class="notice-section">
+        <h2><i class="fas fa-user-graduate"></i> Student Notices</h2>
+
+        <!-- IMPORTANT: Backend ke liye ID -->
+        <div id="studentNoticeContainer">
+
+            <!-- Sample Static Notice (future me database se aayega) -->
+            <div class="notice-card" data-id="1">
+                <i class="fas fa-circle-info"></i>
+                <div>
+                    <h4 class="notice-title">Exam Schedule Released</h4>
+                    <p class="notice-message">
+                        Mid semester examination schedule has been published by Admin.
+                    </p>
+                    <span class="date">Posted on: 
+                        <span class="notice-date">06 Feb 2026</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="notice-card" data-id="2">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <h4 class="notice-title">Holiday Announcement</h4>
+                    <p class="notice-message">
+                        College will remain closed on account of public holiday.
+                    </p>
+                    <span class="date">Posted on: 
+                        <span class="notice-date">08 Feb 2026</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TEACHER NOTICE SECTION -->
+    <div class="notice-section">
+        <h2><i class="fas fa-chalkboard-teacher"></i> Teacher Notices</h2>
+
+        <!-- IMPORTANT: Backend ke liye ID -->
+        <div id="teacherNoticeContainer">
+
+            <div class="notice-card" data-id="3">
+                <i class="fas fa-file-alt"></i>
+                <div>
+                    <h4 class="notice-title">Staff Meeting</h4>
+                    <p class="notice-message">
+                        Admin has scheduled a staff meeting regarding academic planning.
+                    </p>
+                    <span class="date">Posted on: 
+                        <span class="notice-date">09 Feb 2026</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="notice-card" data-id="4">
+                <i class="fas fa-clipboard-list"></i>
+                <div>
+                    <h4 class="notice-title">Attendance Submission</h4>
+                    <p class="notice-message">
+                        Please submit monthly attendance reports before deadline.
+                    </p>
+                    <span class="date">Posted on: 
+                        <span class="notice-date">07 Feb 2026</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
