@@ -1,11 +1,15 @@
 package com.ams.service;
 
-import com.ams.model.User;
-import com.ams.repository.UserRepository;
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ams.model.StudentDetails;
+import com.ams.model.TeacherDetails;
+import com.ams.model.User;
+import com.ams.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -17,6 +21,13 @@ public class UserService {
     // This constructor tells Spring to plug in the Repository for you
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+    
+ // return mail id from userRepo to AdminController
+
+    public User findById(Long id) {
+        return userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
     // 1. Method for Student Registration
@@ -74,5 +85,46 @@ public class UserService {
 
         userRepository.save(user); // Save to DB
         return true;
+    }
+    
+ // Add this to your UserService class
+    public List<User> findPendingByRole(String role) {
+        return userRepository.findByRoleAndStatus(role, "PENDING");
+    }
+    
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+    
+    
+    
+    @Transactional
+    public void activateAndAssign(Long userId, String rollNo, String department, 
+                                 String course, String year, String employeeId, 
+                                 String designation, String qualification, String phone) {
+        
+    	User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+        user.setStatus("ACTIVE");
+
+        if ("STUDENT".equals(user.getRole())) {
+            StudentDetails student = new StudentDetails();
+            student.setRollNumber(rollNo); // Captured
+            student.setDepartment(department); // Was this missing?
+            student.setCourse(course); // Was this missing?
+            student.setYear(year); // Was this missing?
+            student.setUser(user);
+            user.setStudentDetails(student);
+        } else if ("TEACHER".equals(user.getRole())) {
+            TeacherDetails teacher = new TeacherDetails();
+            teacher.setEmployeeId(employeeId); // Captured
+            teacher.setDesignation(designation); // Was this missing?
+            teacher.setDepartment(department); // Was this missing?
+            teacher.setQualification(qualification); // Was this missing?
+            teacher.setPhoneNumber(phone); // Was this missing?
+            teacher.setUser(user);
+            user.setTeacherDetails(teacher);
+        }
+        userRepository.save(user);
     }
 }

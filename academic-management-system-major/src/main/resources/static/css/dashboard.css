@@ -49,27 +49,25 @@ header i{
     box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
-.card i{
-    font-size:35px;
-    margin-bottom:15px;
-    color:#ffcc00;
+
+
+
+/* Active Blue Button */
+.btn-approve-blue {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
 }
 
-.card h3{
-    margin-bottom:10px;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-    background:rgba(255,255,255,0.2);
-}
-
-/* Notice Special Highlight */
-.notice-card{
-    border:2px solid #ffcc00;
-}
-.card h2{
-    font-size:26px;
-    margin:10px 0;
-    color:#ffcc00;
+/* Faded Grey Approved State */
+.btn-status-approved {
+    background-color: #f3f4f6; /* Very light grey */
+    color: #9ca3af;            /* Faded text color */
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border: 1px solid #e5e7eb;
 }

@@ -30,11 +30,11 @@ public class RegistrationController {
                                @RequestParam String role, 
                                Model model) {
         
-        // Let the Service decide if the user can be saved
+       
         boolean isSaved = userService.registerNewUser(name, email, password, role);
 
         if (isSaved) {
-            // Instead of redirecting, stay here and pass a success attribute
+            
             model.addAttribute("registrationSuccess", true);
             return "register"; 
         } else {

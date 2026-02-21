@@ -1,5 +1,6 @@
 package com.ams.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	// help  find student who need an approval 
  	boolean existsByEmail(String email);
- 	
+ 	List<User> findByRoleAndStatus(String role, String status);
 }

@@ -1,9 +1,11 @@
 package com.ams.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,11 +20,20 @@ public class User {
     private String role;
     private boolean enabled;
     private String status; // Will store "PENDING", "APPROVED", or "REJECTED"
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private StudentDetails studentDetails;
+
 
     // Required by Hibernate
     public User() {}
-
-  
+    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
@@ -41,4 +52,23 @@ public class User {
 
 	public String getStatus() { return status; }
 	public void setStatus(String status) { this.status = status; }
+	public StudentDetails getStudentDetails() {
+		return studentDetails;
+	}
+	public void setStudentDetails(StudentDetails studentDetails) {
+		this.studentDetails = studentDetails;
+	}
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private TeacherDetails teacherDetails;
+
+	// The missing method that was causing your error
+	public void setTeacherDetails(TeacherDetails teacherDetails) {
+	    this.teacherDetails = teacherDetails;
+	}
+
+	public TeacherDetails getTeacherDetails() {
+	    return teacherDetails;
+	}
+	
 }

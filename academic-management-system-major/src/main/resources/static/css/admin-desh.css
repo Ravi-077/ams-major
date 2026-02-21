@@ -159,3 +159,49 @@ th, td{
 span {
     color: #6f00ff;
 }
+
+
+/* Container that holds the 'Teacher' and 'Student' buttons */
+.tab-navigation {
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: white; /* Adds a clean background */
+}
+
+/* Individual tab buttons */
+.btn-tab {
+    flex: 1; /* Makes both buttons 50% width */
+    padding: 15px;
+    text-align: center;
+    text-decoration: none; /* Removes the blue underline */
+    font-weight: bold;
+    font-size: 16px;
+    color: #4b5563; /* Subtle grey text */
+    background-color: #f9fafb; /* Light grey background */
+    transition: all 0.3s ease;
+}
+
+/* The Blue state for the active toggle (LinkedIn style) */
+.active-tab {
+    background-color: #1e2a55 !important; /* Matching your sidebar hover color */
+    color: white !important;
+}
+
+/* Hover effect for the inactive tab */
+.btn-tab:hover:not(.active-tab) {
+    background-color: #e5e7eb;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #9ca3af;
+    font-style: italic;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px dashed #d1d5db;
+}
