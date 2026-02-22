@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" th:href="@{/css/admin-desh.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">Admin IQ</div>
+
+        <ul class="menu">
+            <li class="active">Dashboard</li>
+            <li>Student Management</li>
+            <li>Teacher Management</li>
+            <li>Course Management</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- TOP NAVBAR -->
+        <div class="topbar">
+
+            <input type="text" placeholder="Search Students, Courses..." id="searchInput">
+
+            <div class="top-right">
+                <div class="bell">🔔</div>
+
+                <div class="admin-profile">
+                    <strong id="adminName" th:text="${userName}">UserName</strong>
+                    <small id="adminEmail" th:text="${userEmail}">UserMailId</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <h4>
+                <p>Welcome back, <span id="welcomeName" th:text="${userName}">User</span>. Here is your academic overview</p>
+            </h4>
+        </div>
+
+        <!-- STATS SECTION -->
+        
+        <div class="stats">
+            <div class="card"><h3>Total Students</h3><h2 id="totalStudents">2845</h2></div>
+            <div class="card"><h3>Total Teachers</h3><h2 id="totalTeachers">186</h2></div>
+            <div class="card"><h3>Total Courses</h3><h2 id="totalCourses">312</h2></div>
+            <div class="card"><h3>Active Sessions</h3><h2 id="activeSessions">42</h2></div>
+        </div>
+        
+        <div th:if="${selectedUser != null}" class="student-section" style="margin-bottom: 30px; border: 2px solid #2563eb;">
+    <h3 style="color: #2563eb;">Assign Details for: <span th:text="${selectedUser.name}"></span></h3>
+    <hr style="margin: 15px 0;">
+    
+    <form th:action="@{/admin/finalize-approval}" method="post" style="display: grid; gap: 15px;">
+        <input type="hidden" name="userId" th:value="${selectedUser.id}">
+        
+        <div th:if="${selectedUser.role == 'STUDENT'}" style="display: flex; gap: 10px;">
+            <input type="text" name="rollNo" placeholder="Roll Number (e.g., BT202401)" required style="flex:1; padding:10px;">
+            <select name="department" required style="flex:1; padding:10px;">
+                <option value="">Select Department</option>
+                <option value="CS">Computer Science</option>
+                <option value="IT">Information Technology</option>
+            </select>
+            <select name="course" required style="flex:1; padding:10px;">
+                <option value="BTECH">B.Tech</option>
+                <option value="MTECH">M.Tech</option>
+            </select>
+            <select name="year" required style="flex:1; padding:10px;">
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+        </div>
+
+     <div th:if="${selectedUser.role == 'TEACHER'}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <input type="text" name="employeeId" placeholder="Employee ID (e.g., TCH-2026-01)" required style="padding:10px;">
+    <input type="text" name="department" placeholder="Department" required style="padding:10px;">
+    <input type="text" name="designation" placeholder="Designation (e.g. Asst. Professor)" required style="padding:10px;">
+    <input type="text" name="qualification" placeholder="Qualification (e.g. M.Tech, PhD)" required style="padding:10px;">
+    <input type="text" name="phoneNumber" placeholder="Phone Number" required style="padding:10px;">
+    <input type="date" name="joiningDate" placeholder="joiningDate" required style="padding:10px;">
+    </div>
+
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn-approve-blue" style="border:none; cursor:pointer;">Confirm & Activate ✅</button>
+            <a th:href="@{/Admindesh(view=${currentView})}" class="btn-status-approved" style="text-align:center;">Cancel</a>
+        </div>
+    </form>
+</div>
+       <div class="tab-navigation">
+    <a th:href="@{/Admindesh(view='teachers')}" 
+       th:classappend="${currentView == 'teachers' ? 'active-tab' : ''}" 
+       class="btn-tab">Teacher-requests</a>
+       
+    <a th:href="@{/Admindesh(view='students')}" 
+       th:classappend="${currentView == 'students' ? 'active-tab' : ''}" 
+       class="btn-tab">Students-requests</a>
+</div>
+
+<div class="request-box">
+    <div th:if="${currentView == 'teachers'}">
+        <h3>Pending Faculty Approval</h3>
+        <table class="approval-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th> <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tr th:each="teacher : ${pendingTeachers}">
+        <td th:text="${teacher.name}"></td>
+        <td th:text="${teacher.email}"></td> <td>
+            <a th:href="@{/Admindesh(reviewId=${teacher.id}, view='teachers')}" 
+               class="btn-approve-blue">Approve</a>
+               
+            <a th:href="@{/admin/reject/{id}(id=${teacher.id}, view='teachers')}" 
+               class="btn-cross">❌</a>
+        </td>
+    </tr>
+    
+</table>
+    </div>
+
+    <div th:if="${currentView == 'students'}">
+        <h3>Pending Student Approval</h3>
+        <table class="approval-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th> <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tr th:each="student : ${pendingStudents}">
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.email}"></td> <td>
+            <a th:if="${student.status == 'PENDING'}" 
+               th:href="@{/Admindesh(reviewId=${student.id}, view='students')}" 
+               class="btn-approve-blue">Approve</a>
+            <a th:href="@{/admin/reject/{id}(id=${student.id}, view='students')}" class="btn-cross">❌</a>
+        </td>
+    </tr>
+    
+</table>
+    </div>
+    <div th:if="${#lists.isEmpty(pendingStudents)}" class="empty-state">
+    <p>☕ All caught up! No pending student requests.</p>
+</div>
+
+<div th:if="${#lists.isEmpty(pendingTeachers)}" class="empty-state">
+    <p>📑 No new faculty applications to review.</p>
+</div>
+</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

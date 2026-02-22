@@ -1,0 +1,73 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    min-height:100vh;
+    color:white;
+}
+
+/* Header */
+header{
+    text-align:center;
+    padding:30px 20px;
+    background:rgba(0,0,0,0.3);
+    backdrop-filter:blur(10px);
+}
+
+header h1{
+    font-size:28px;
+}
+
+header i{
+    color:#ffcc00;
+}
+
+/* Dashboard Grid */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+/* Cards */
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    transition:0.3s;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+
+
+/* Active Blue Button */
+.btn-approve-blue {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Faded Grey Approved State */
+.btn-status-approved {
+    background-color: #f3f4f6; /* Very light grey */
+    color: #9ca3af;            /* Faded text color */
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border: 1px solid #e5e7eb;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <!-- LEFT SECTION -->
+        <div class="left-panel">
+            <h2>Admin IQ</h2>
+           <h2><p>Academic Management System</p></h2> 
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="right-panel">
+
+            <h2>Login</h2>
+            
+            <div th:if="${param.pending}" class="alert-pending">
+                <i class="fas fa-info-circle"></i> 
+                <span>"Registration Successful! Your account is awaiting admin review. We will notify you via email as soon as your profile is active."</span>
+            </div>
+            <form th:action="@{/login}" method="post" >
+
+                <div class="input-group">
+                    <label>Email</label>
+                    
+                    
+                    <input type="email" name="email" required placeholder="Enter Email"> 
+    
+                </div>
+
+              <div class="input-group">
+    <label>Password</label>
+    <input type="password" id="password" name="password" required placeholder="Enter Password">
+</div>
+
+<div class="form-check">
+    <input type="checkbox" id="showPass" onclick="togglePassword()">
+    <label for="showPass">Show Password</label>
+</div>
+
+<script>
+function togglePassword() {
+    // This now matches the ID added above
+    var passField = document.getElementById("password");
+    if (passField.type === "password") {
+        passField.type = "text";
+    } else {
+        passField.type = "password";
+    }
+}
+</script></script>
+
+                <!-- <button type="submit" class="login-btn">
+                    Login
+                </button> -->
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <br>
+            <div class="register-link">
+                <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+            </div>
+           
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
