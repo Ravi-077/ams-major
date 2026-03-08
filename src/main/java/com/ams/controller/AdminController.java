@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ams.model.Admin;
 import com.ams.model.Course;
 import com.ams.model.StudentDetails;
 import com.ams.model.User;
+import com.ams.repository.UserRepository;
 import com.ams.service.AdminService;
 import com.ams.service.CourseService;
 import com.ams.service.EmailService;
@@ -42,6 +43,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired	
+	private UserRepository userRepository;
 
 	
 	@GetMapping("/admin/teachers")
@@ -143,5 +147,11 @@ public class AdminController {
         emailService.sendApprovalEmail(user.getEmail(), user.getName(), designation, employeeId);
         
         return "redirect:/Admindesh"; 
+    }
+    
+    @ModelAttribute
+    public void addCountsToAllAdminPages(Model model) {
+        model.addAttribute("pendingTeacherCount", userRepository.countByRoleAndStatus("TEACHER", "PENDING"));
+        model.addAttribute("pendingStudentCount", userRepository.countByRoleAndStatus("STUDENT", "PENDING"));
     }
 }

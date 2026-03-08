@@ -127,14 +127,24 @@
         </div>
     </form>
 </div>
-       <div class="tab-navigation">
+      <div class="tab-navigation">
     <a th:href="@{/Admindesh(view='teachers')}" 
        th:classappend="${currentView == 'teachers' ? 'active-tab' : ''}" 
-       class="btn-tab">Teacher-requests</a>
+       class="btn-tab" style="position: relative;">
+        Teacher-requests
+        <span th:if="${pendingTeacherCount > 0}" 
+              th:text="${pendingTeacherCount}" 
+              class="badge"></span>
+    </a>
        
     <a th:href="@{/Admindesh(view='students')}" 
        th:classappend="${currentView == 'students' ? 'active-tab' : ''}" 
-       class="btn-tab">Students-requests</a>
+       class="btn-tab" style="position: relative;">
+        Students-requests
+        <span th:if="${pendingStudentCount > 0}" 
+              th:text="${pendingStudentCount}" 
+              class="badge"></span>
+    </a>
 </div>
 
 <div class="request-box">
