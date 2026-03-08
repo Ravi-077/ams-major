@@ -15,7 +15,8 @@
 
         <!-- LEFT SECTION -->
         <div class="left-panel">
-            <h2>Admin IQ</h2>
+            <span class="logo-icon">🎓</span> AMS<span>Portal</span>
+            <br>
            <h2><p>Academic Management System</p></h2> 
         </div>
 
@@ -28,6 +29,11 @@
                 <i class="fas fa-info-circle"></i> 
                 <span>"Registration Successful! Your account is awaiting admin review. We will notify you via email as soon as your profile is active."</span>
             </div>
+            
+            <div th:if="${param.error}" class="alert-error" style="color: red; margin-bottom: 10px;">
+    <span>Invalid email or password. Please try again.</span>
+</div>
+
             <form th:action="@{/login}" method="post" >
 
                 <div class="input-group">

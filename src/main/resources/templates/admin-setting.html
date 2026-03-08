@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Settings</title>
+<link rel="stylesheet" href="/css/admin-settings.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>⚙ Admin Settings</h1>
+    </div>
+
+    <div class="settings-grid">
+        <div class="settings-card">
+            <h2>👤 Admin Profile</h2>
+            <form th:action="@{/admin/settings/profile}" method="post" enctype="multipart/form-data">
+                <label>Full Name</label>
+                <input type="text" name="fullName" th:value="${admin.name}" placeholder="Enter Admin Name">
+
+                <label>Email</label>
+                <input type="email" name="email" th:value="${admin.email}" placeholder="Enter Email">
+
+                <label>Change Password</label>
+                <input type="password" name="newPassword" placeholder="New Password">
+
+                <label>Profile Photo</label>
+                <input type="file" name="photo">
+
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+
+        <div class="settings-card">
+            <h2>🔐 Role & Permission</h2>
+            <form th:action="@{/admin/settings/create-subadmin}" method="post">
+                <label>Create Sub-Admin</label>
+                <input type="text" name="subAdminName" placeholder="Enter Name">
+
+                <label>Assign Role</label>
+                <select name="role">
+                    <option value="ROLE_HOD">HOD</option>
+                    <option value="ROLE_ACCOUNTANT">Accountant</option>
+                    <option value="ROLE_EXAM_CONTROLLER">Exam Controller</option>
+                </select>
+
+                <button type="submit">Create User</button>
+            </form>
+        </div>
+
+        <div class="settings-card">
+            <h2>💾 Admin Controls</h2>
+            <div class="button-group">
+                <form th:action="@{/admin/settings/backup}" method="post">
+                    <button type="submit" class="ctrl-btn">Backup Database</button>
+                </form>
+                <form th:action="@{/admin/settings/restore}" method="post">
+                    <button type="submit" class="ctrl-btn">Restore Database</button>
+                </form>
+                <form th:action="@{/admin/settings/clear-logs}" method="post">
+                    <button type="submit" class="ctrl-btn danger">Clear System Logs</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+<div class="home-section">
+   <a th:href="@{/Admindesh}" class="home-btn">
+        <i class="fas fa-home"></i> Go to Home
+    </a>
+</div>
+</div>
+</body>
+</html>

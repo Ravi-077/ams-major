@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Dashboard</title>
-<link rel="stylesheet" href="teacherdesh.css">
+<link rel="stylesheet" href="/css/teacherdesh.css">
 
 <!-- Font Awesome -->
 <link rel="stylesheet"
@@ -19,6 +19,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         Welcome, <span id="teacherName">Teacher</span> 👋
     </h1>
 </header>
+
+ <div class="logout-container">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+</div>
 
 <section class="dashboard">
 
@@ -97,5 +105,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     </a>
 </div>
 
+ <div class="logout-container">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+    
+</div>
 </body>
 </html>

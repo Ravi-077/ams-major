@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Teacher Management</title>
+<link rel="stylesheet" href="/css/teachermanagement.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1>👨‍🏫 Teacher Management</h1>
+        <a href="addteacher.html" class="add-btn">➕ Add New Teacher</a>
+    </div>
+
+    <!-- FILTER SECTION -->
+    <div class="filter-section">
+        <input type="text" placeholder="Search by Name or Employee ID">
+
+        <select>
+            <option>All Departments</option>
+            <option>Computer Science</option>
+            <option>Information Technology</option>
+            <option>Mechanical</option>
+            <option>Civil</option>
+        </select>
+
+        <select>
+            <option>All Status</option>
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+
+        <button class="filter-btn">Search</button>
+    </div>
+
+<div class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Qualification</th>
+                <th>Assigned Subjects</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="teacher : ${teachers}">
+                <td th:text="${teacher.employeeId}">T-101</td>
+                <td th:text="${teacher.user.name}">Mr. Sharma</td>
+              <td th:text="${teacher.department?.name ?: 'N/A'}">Department</td>
+                <td th:text="${teacher.qualification}">M.Tech</td>
+                <td th:text="${teacher.assignedSubjects}">Computer Networks</td>
+                <td>
+                    <span class="status" 
+      th:classappend="${teacher.user.status == 'ACTIVE' ? 'active' : 'suspended'}"
+      th:text="${teacher.user.status}">ACTIVE</span>
+                </td>
+                <td>
+                    <a th:href="@{/admin/teacher/assign/{id}(id=${teacher.id})}" class="btn-link">
+                        <button class="assign">Assign</button>
+                    </a>
+                    <a th:href="@{/admin/teacher/edit/{id}(id=${teacher.id})}" class="btn-link">
+                        <button class="edit">Edit</button>
+                    </a>
+                    <form th:action="@{/admin/teacher/deactivate/{id}(id=${teacher.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="deactivate">Deactivate</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+<div class="home-section">
+    <a th:href="@{/Admindesh}" class="home-btn">
+        <i class="fas fa-home"></i> Go to Home
+    </a>
+</div>
+</div>

@@ -11,21 +11,24 @@
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
-    <div class="logo">StudentEdu</div>
-
-    <ul class="nav-links">
-        <li><a href="https://vivekanandgroup.com/blogs#">Placement</a></li>
-        <!-- <li><a href="#">Register</a></li> -->
-        <li><a href="https://vivekanandgroup.com/program/info/13/About%20Us/Administration">About</a></li>
-        <li><a href="student-login.html">Student Zone</a></li>
-        <li><a href="notice.html">Notice</a></li>
-    </ul>
-    
- <div class="button-container">
-    <a th:href="@{/login}" class="btn login-btn">Login</a>
-    <a th:href="@{/register}" class="btn register-btn">Sign Up</a>
-</div>
+<nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">🎓</span> AMS<span>Portal</span>
+        </div>
+        <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Notice</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>
+         </div>
+        <div class="auth-buttons">
+            <a th:href="@{/login}" class="btn btn-outline">Login</a>
+            <a th:href="@{/register}" class="btn btn-filled">Sign Up</a>
+        </div>
+</nav>
 
   <!--   <div class="right-buttons">
        <a th:href="@{/login}" class="nav-btn">Login</a>

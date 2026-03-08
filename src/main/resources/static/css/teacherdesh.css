@@ -88,3 +88,36 @@ header {
     background: #4e73df;
     color: white;
 }
+
+
+
+.logout-container {
+    padding: 20px;
+    margin-top: auto; /* If using a flexbox sidebar, this pushes it to the bottom */
+}
+
+.logout-btn {
+    background-color: #dc3545; /* Professional Danger Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    width: 100%; /* Full width for sidebar look */
+    justify-content: center;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.logout-btn i {
+    font-size: 1.1rem;
+}

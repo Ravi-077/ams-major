@@ -1,44 +1,108 @@
-/* /* 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
 }
-.navbar{
-    width:100%;
-    display:flex;
-    justify-content:space-between;  
-    align-items:center;
-    padding:15px 60px;
-    background:white;
+
+:root {
+    --primary-dark: #1e293b; /* Deep Slate Navy */
+    --accent-blue: #3b82f6;  /* Modern Bright Blue */
+    --text-main: #334155;
+    --white: #ffffff;
 }
 
-/* .right-buttons{
-    display:flex;
-    gap:15px;
-} */
+.navbar {
+    background: var(--white);
+    padding: 1rem 5%; /* Adds 5% horizontal padding for better breathing room */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: left;
+    gap: 10px;
+    flex: 1; 
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+.logo span {
+    color: var(--accent-blue);
+}
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem; 
+    flex: 2;
+    justify-content: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+
+/* Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+    justify-content: flex-end;
+}
 
 .btn {
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 600;
+    align-items:right;
+    font-size: 0.9rem;
     text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin: 10px;
+    transition: all 0.3s ease;
 }
 
-.login-btn {
-    background-color: transparent;
-    border: 2px solid #ff8c00;
-    color: #ff8c00;
+.btn-outline {
+    border: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
 }
 
-.register-btn {
-    background-color: #ff8c00;
-    color: white;
+.btn-outline:hover {
+    background: #eff6ff;
 }
 
+.btn-filled {
+    background: var(--accent-blue);
+    color: var(--white);
+    border: 2px solid var(--accent-blue);
+}
+
+.btn-filled:hover {
+    background: #2563eb;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
 
 body{
     margin:0;
@@ -54,6 +118,10 @@ body{
     font-size:24px;
     font-weight:bold;
     color:#0077ff;
+}
+.logo:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
 }
 
 .nav-links{

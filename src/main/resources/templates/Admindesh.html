@@ -13,15 +13,25 @@
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <div class="logo">Admin IQ</div>
+        <div class="logo">AMS Admin</div>
 
-        <ul class="menu">
-            <li class="active">Dashboard</li>
-            <li>Student Management</li>
-            <li>Teacher Management</li>
-            <li>Course Management</li>
-            <li>Settings</li>
-        </ul>
+       <ul class="menu">
+    <li th:classappend="${activePage == 'dashboard' ? 'active' : ''}">
+        <a th:href="@{/Admindesh}">Dashboard</a>
+    </li>
+    <li th:classappend="${activePage == 'students' ? 'active' : ''}">
+        <a th:href="@{/admin/students}">Student Management</a>
+    </li>
+    <li th:classappend="${activePage == 'teachers' ? 'active' : ''}">
+        <a th:href="@{/admin/teachers}">Teacher Management</a>
+    </li>
+    <li th:classappend="${activePage == 'courses' ? 'active' : ''}">
+        <a th:href="@{/admin/courses}">Course Management</a>
+    </li>
+    <li th:classappend="${activePage == 'settings' ? 'active' : ''}">
+        <a th:href="@{/admin/settings}">Settings</a>
+    </li>
+</ul>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -38,6 +48,14 @@
                 <div class="admin-profile">
                     <strong id="adminName" th:text="${userName}">UserName</strong>
                     <small id="adminEmail" th:text="${userEmail}">UserMailId</small>
+                    
+                    <div class="logout-container">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+</div>
                 </div>
             </div>
 
@@ -67,33 +85,41 @@
     <form th:action="@{/admin/finalize-approval}" method="post" style="display: grid; gap: 15px;">
         <input type="hidden" name="userId" th:value="${selectedUser.id}">
         
-        <div th:if="${selectedUser.role == 'STUDENT'}" style="display: flex; gap: 10px;">
-            <input type="text" name="rollNo" placeholder="Roll Number (e.g., BT202401)" required style="flex:1; padding:10px;">
-            <select name="department" required style="flex:1; padding:10px;">
-                <option value="">Select Department</option>
-                <option value="CS">Computer Science</option>
-                <option value="IT">Information Technology</option>
-            </select>
-            <select name="course" required style="flex:1; padding:10px;">
-                <option value="BTECH">B.Tech</option>
-                <option value="MTECH">M.Tech</option>
-            </select>
-            <select name="year" required style="flex:1; padding:10px;">
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-            </select>
-        </div>
+<div th:if="${selectedUser.role == 'STUDENT'}" style="display: flex; gap: 10px;">
+    <input type="text" name="rollNumber" placeholder="Roll Number" required style="flex:1; padding:10px;">
+    
+    <select name="department" required style="flex:1; padding:10px;">
+        <option value="">Select Department</option>
+        <option value="CS">Computer Science</option>
+        <option value="IT">Information Technology</option>
+    </select>
 
-     <div th:if="${selectedUser.role == 'TEACHER'}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-    <input type="text" name="employeeId" placeholder="Employee ID (e.g., TCH-2026-01)" required style="padding:10px;">
-    <input type="text" name="department" placeholder="Department" required style="padding:10px;">
-    <input type="text" name="designation" placeholder="Designation (e.g. Asst. Professor)" required style="padding:10px;">
-    <input type="text" name="qualification" placeholder="Qualification (e.g. M.Tech, PhD)" required style="padding:10px;">
-    <input type="text" name="phoneNumber" placeholder="Phone Number" required style="padding:10px;">
-    <input type="date" name="joiningDate" placeholder="joiningDate" required style="padding:10px;">
-    </div>
+    <select name="course" required style="flex:1; padding:10px;">
+        <option value="">Select Course</option>
+        <option value="BTECH">B.Tech</option>
+        <option value="MTECH">M.Tech</option>
+    </select>
+    
+    <select name="year" required style="flex:1; padding:10px;">
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+    </select>
+</div>
+
+<div th:if="${selectedUser.role == 'TEACHER'}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <input type="text" name="employeeId" placeholder="Employee ID" required style="padding:10px;">
+    
+    <select name="department" required style="padding:10px;">
+        <option value="CS">Computer Science</option>
+        <option value="IT">Information Technology</option>
+    </select>
+    
+    <input type="text" name="designation" placeholder="Designation" required style="padding:10px;">
+    <input type="text" name="qualification" placeholder="Qualification" required style="padding:10px;">
+    <input type="text" name="phone" placeholder="Phone Number" required style="padding:10px;">
+</div>
 
         <div style="display: flex; gap: 10px;">
             <button type="submit" class="btn-approve-blue" style="border:none; cursor:pointer;">Confirm & Activate ✅</button>
@@ -129,7 +155,7 @@
                class="btn-approve-blue">Approve</a>
                
             <a th:href="@{/admin/reject/{id}(id=${teacher.id}, view='teachers')}" 
-               class="btn-cross">❌</a>
+               class="btn-cross">Reject</a>
         </td>
     </tr>
     
@@ -152,7 +178,7 @@
             <a th:if="${student.status == 'PENDING'}" 
                th:href="@{/Admindesh(reviewId=${student.id}, view='students')}" 
                class="btn-approve-blue">Approve</a>
-            <a th:href="@{/admin/reject/{id}(id=${student.id}, view='students')}" class="btn-cross">❌</a>
+            <a th:href="@{/admin/reject/{id}(id=${student.id}, view='students')}" class="btn-cross">Reject</a>
         </td>
     </tr>
     

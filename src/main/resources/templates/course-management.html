@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Course Management</title>
+<link rel="stylesheet" href="/css/course-management.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>📚 Course Management</h1>
+        <a th:href="@{/admin/courses/add}" class="add-btn" style="text-decoration: none;">➕ Create New Course</a>
+    </div>
+
+    <div class="filter-section">
+        <form th:action="@{/admin/courses/search}" method="get" style="display: flex; gap: 10px;">
+            <input type="text" name="keyword" placeholder="Search by Course Name">
+            
+            <select name="session">
+                <option value="">All Sessions</option>
+                <option value="2024-25">2024-25</option>
+                <option value="2025-26">2025-26</option>
+            </select>
+
+            <select name="status">
+                <option value="">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+
+            <button type="submit" class="filter-btn">Search</button>
+        </form>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Duration</th>
+                    <th>Total Subjects</th>
+                    <th>Session</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.code}">BTECH-CS</td>
+                    <td th:text="${course.name}">B.Tech Computer Science</td>
+                    <td th:text="${course.duration}">4 Years</td>
+                    <td th:text="${course.totalSubjects}">32</td>
+                    <td th:text="${course.session}">2025-26</td>
+                    <td>
+                        <span class="status" 
+                              th:classappend="${course.status == 'Active' ? 'active' : 'inactive'}"
+                              th:text="${course.status}">Active</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/courses/edit/{id}(id=${course.id})}"><button class="edit">Edit</button></a>
+                        <a th:href="@{/admin/courses/subjects/{id}(id=${course.id})}"><button class="subjects">Subjects</button></a>
+                        
+                        <form th:action="@{/admin/courses/deactivate/{id}(id=${course.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="deactivate">Deactivate</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+<div class="home-section">
+   <a th:href="@{/Admindesh}" class="home-btn">
+        <i class="fas fa-home"></i> Go to Home
+    </a>
+</div>
+</div>

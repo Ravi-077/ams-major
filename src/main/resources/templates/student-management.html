@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Student Management</title>
+
+<link rel="stylesheet" href="/css/studentmanagement.css">
+
+</head>
+
+<div class="container">
+    <div class="page-header">
+        <h1>🎓 Student Management</h1>
+        <a th:href="@{/admin/students/add}" class="add-btn" style="text-decoration: none;">➕ Add New Student</a>
+    </div>
+
+    <div class="filter-section">
+        <form th:action="@{/admin/students/search}" method="get" style="display: flex;">
+            <input type="text" name="keyword" placeholder="Search by Name or Roll No">
+
+            <select name="department">
+                <option value="">All Departments</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Technology</option>
+            </select>
+
+            <select name="status">
+                <option value="">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Alumni">Alumni</option>
+                <option value="Suspended">Suspended</option>
+            </select>
+
+            <button type="submit" class="filter-btn">Search</button>
+        </form>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>Fee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.rollNumber}">CS-101</td>
+                    <td th:text="${student.user.name}">Rahul Prajapati</td>
+                   <td th:text="${student.department?.name ?: 'N/A'}">CSE</td>
+                    <td th:text="${student.year}">3rd Year</td>
+                    <td>
+                       <span class="status" 
+      th:classappend="${student.user.status == 'ACTIVE' ? 'active' : 'suspended'}"
+      th:text="${student.user.status}">ACTIVE</span>		`
+    
+                    </td>
+                    <td>
+                        <span class="fee" 
+      th:classappend="${(student.feeStatus == 'Paid' || student.feeStatus == null) ? 'paid' : 'pending'}"
+      th:text="${student.feeStatus ?: 'Paid'}">Paid</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/students/edit/{id}(id=${student.id})}"><button class="edit">Edit</button></a>
+                        <a th:href="@{/admin/students/view/{id}(id=${student.id})}"><button class="view">View</button></a>
+                        
+                        <form th:action="@{/admin/students/deactivate/{id}(id=${student.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="deactivate">Deactivate</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+<div class="home-section">
+   <a th:href="@{/Admindesh}" class="home-btn">
+        <i class="fas fa-home"></i> Go to Home
+    </a>
+</div>
+</html>

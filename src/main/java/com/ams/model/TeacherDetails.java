@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -18,16 +19,56 @@ public class TeacherDetails {
 
     @Column(unique = true)
     private String employeeId; // Admin-generated
-    
-    private String department;
+    private String name;
+   
     private String designation;
     private String qualification;
+    private String assignedSubjects;
     private String phoneNumber;
     private LocalDate joiningDate;
+    private String status;
+    
+    @ManyToOne
+    @JoinColumn(name = "dept_id") // Links to the departments table
+    private Department department;
 
+    
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user; // The link to the main account
+    private User user; 
+    
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAssignedSubjects() {
+		return assignedSubjects;
+	}
+
+	public void setAssignedSubjects(String assignedSubjects) {
+		this.assignedSubjects = assignedSubjects;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -37,13 +78,14 @@ public class TeacherDetails {
 		this.employeeId = employeeId;
 	}
 
-	public String getDepartment() {
-		return department;
+	public Department getDepartment() {
+	    return department;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDepartment(Department department) {
+	    this.department = department;
 	}
+
 
 	public String getDesignation() {
 		return designation;
@@ -85,5 +127,6 @@ public class TeacherDetails {
 		this.user = user;
 	}
 
+	
     
 }

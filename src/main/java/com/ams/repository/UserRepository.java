@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ams.model.User;
@@ -12,9 +14,11 @@ import com.ams.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	// this  help us to find user by mail 
-	Optional<User> findByEmail (String email);
+	@Query("SELECT u FROM User u WHERE u.email = :email")
+	Optional<User> findByEmailClean(@Param("email") String email);
 	
 	// help  find student who need an approval 
  	boolean existsByEmail(String email);
  	List<User> findByRoleAndStatus(String role, String status);
+ 	
 }

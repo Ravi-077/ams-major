@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+}
+
+.container {
+    padding: 40px;
+}
+
+/* HEADER */
+.page-header {
+    margin-bottom: 30px;
+}
+
+/* GRID LAYOUT */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+/* CARD DESIGN */
+.settings-card {
+    background: white;
+    color: #333;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.settings-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2a5298;
+}
+
+/* FORM ELEMENTS */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* BUTTON */
+button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    background: #2a5298;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e3c72;
+} 
+
+
+.home-section {
+    margin: 30px;
+}
+
+.home-btn {
+    background: #fff;
+    color: #4e73df;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: #4e73df;
+    color: white;
+}

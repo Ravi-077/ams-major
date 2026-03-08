@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+
+<link rel="stylesheet" th:href="@{/css/student-dash.css}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+    <h1>
+        <i class="fas fa-user-graduate"></i> 
+        Welcome, 
+       <span id="studentName" th:text="${student?.user?.name ?: 'Student User'}">Rahul Prajapati</span> 👋
+    </h1>
+</header>
+
+
+
+<section class="dashboard">
+
+    <div class="card">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Attendance</h3>
+<span th:text="${student?.attendance != null ? student.attendance + '%' : '0%'}">0%</span>
+        <p>Overall Attendance</p>
+    </div>
+
+<div class="card">
+    <i class="fas fa-pen"></i>
+    <h3>Mid Term Marks</h3>
+    <h2 id="midMarks" th:text="${student?.midMarks != null ? student.midMarks + ' / 100' : 'N/A'}">78 / 100</h2>
+    <p>Latest Exam Score</p>
+</div>
+
+<div class="card">
+    <i class="fas fa-book"></i>
+    <h3>Subjects</h3>
+    <h2 id="subjects" th:text="${student?.subjects ?: '0'}">6</h2>
+    <p>Enrolled Subjects</p>
+</div>
+
+<div class="card">
+    <i class="fas fa-file-alt"></i>
+    <h3>Assignments</h3>
+    <h2 id="assignments" th:text="${student?.assignments != null ? student.assignments + ' Pending' : 'No Pending'}">2 Pending</h2>
+    <p>Submission Status</p>
+</div>
+
+<div class="card">
+    <i class="fas fa-chart-line"></i>
+    <h3>Performance</h3>
+    <h2 id="grade" th:text="${student?.grade ?: 'N/A'}">A Grade</h2>
+    <p>Overall Academic Performance</p>
+</div>
+
+    <!-- Notice Card -->
+    <a th:href="@{/notice}" class="card notice-card">
+        <i class="fas fa-bell"></i>
+        <h3>Any Notice</h3>
+        <p>Click to view latest announcements</p>
+    </a>
+
+</section>
+ <div class="logout-container">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
