@@ -272,3 +272,44 @@ span {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     z-index: 5;
 }
+
+
+/* Container for the label and select to keep them aligned */
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between label and dropdown */
+    margin-bottom: 15px;
+}
+
+/* Styling the Select Dropdown to match the inputs */
+select.form-control {
+    width: 100%; /* Or set a specific width if it's in a grid */
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    appearance: none; /* Removes the default arrow in some browsers */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
+}
+
+/* Hover and Focus States */
+select.form-control:focus {
+    border-color: #4f46e5;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* Style for the Label to make it professional */
+label.assign-label {
+    font-weight: 500;
+    color: #1f2937;
+    white-space: nowrap; /* Prevents label from wrapping */
+}

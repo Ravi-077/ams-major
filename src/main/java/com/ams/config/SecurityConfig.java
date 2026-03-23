@@ -2,6 +2,7 @@ package com.ams.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,37 +13,61 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig {
 
-	    @Bean
-	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	        http
-	            .authorizeHttpRequests(auth -> auth
-	                .requestMatchers("/","/login", "/register", "/css/**", "/js/**").permitAll() // Public
-	                .requestMatchers("/admin/**").hasRole("ADMIN") 
-	                .requestMatchers("/student/**").hasRole("STUDENT")
-	                .anyRequest().authenticated()
-	            )
-	            .formLogin(form -> form
-	                .loginPage("/login") 
-	                .usernameParameter("email")
-	                .successHandler(customSuccessHandler())
-	                .failureHandler((request, response, exception) -> {
-	                    System.out.println("DEBUG: Login Failed. Reason: " + exception.getMessage());
-	                    response.sendRedirect("/login?error=true");
-	                })
-	                .permitAll()
-	                )
-//	            .logout(logout -> logout.permitAll());
-	        .logout(logout -> logout
-	                .logoutUrl("/logout") 
-	                .logoutSuccessUrl("/login?logout=true")
-	                .invalidateHttpSession(true) 
-	                .clearAuthentication(true)
-	                .deleteCookies("JSESSIONID") 
-	                .permitAll()
-	            );
+	// 1. DEDICATED ADMIN FILTER CHAIN (Evaluator Requirement)
+    @Bean
+    @Order(1)
+    public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher("/admin/**") // This chain ONLY handles /admin URLs
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().hasRole("ADMIN") // Strict Role Check
+            )
+            .formLogin(form -> form
+                .loginPage("/admin/login") // The "Secret" Login Page
+                .loginProcessingUrl("/admin/login/process")
+                .usernameParameter("email")
+                .defaultSuccessUrl("/admin/dashboard", true)
+                .failureUrl("/admin/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/admin/logout")
+                .logoutSuccessUrl("/admin/login?logout=true")
+                .deleteCookies("JSESSIONID")
+            );
+        return http.build();
+    }
 
-	        return http.build();
-	    }
+    // 2. MAIN FILTER CHAIN (For Students and Teachers)
+    @Bean
+    @Order(2)
+    public SecurityFilterChain mainFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/student/**").hasRole("STUDENT")
+                .requestMatchers("/teacher/**").hasRole("TEACHER")
+                .requestMatchers("/admin/**").denyAll()// Added for consistency
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .usernameParameter("email")
+                .successHandler(customSuccessHandler()) // Keeps your existing routing logic
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            );
+
+        return http.build();
+    }
 	    
 	    @Bean
 	       public AuthenticationSuccessHandler customSuccessHandler() {

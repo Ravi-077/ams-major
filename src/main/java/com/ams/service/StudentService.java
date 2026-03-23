@@ -11,4 +11,5 @@ public interface StudentService {
     void saveStudent(StudentDetails student);
     StudentDetails getStudentById(Long id);
     void deleteStudentById(Long id);
+    long getTotalStudentCount();
 }

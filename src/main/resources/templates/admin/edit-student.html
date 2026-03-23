@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/student-edit.css}">
+    <title>Edit Student | AMS</title>
+</head>
+<body>
+    <div class="edit-container">
+        <div class="edit-card">
+            <h2>Edit Student Profile</h2>
+            <hr>
+            <form th:action="@{/students/update}" th:object="${student}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Email (Primary ID)</label>
+                        <input type="text" th:field="*{user.email}" readonly class="readonly-field">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Roll Number</label>
+                        <input type="text" th:field="*{rollNumber}" readonly class="readonly-field">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" th:field="*{name}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Father's Name</label>
+                        <input type="text" th:field="*{fatherName}">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mobile Number</label>
+                        <input type="text" th:field="*{mobileNumber}">
+                    </div>
+                    
+     <div class="input-group">
+    <label>Department</label>
+    <select name="department.id">
+        <option value="" th:selected="${student.department == null}" disabled>-- Select Department --</option>
+        <option value="1" th:selected="${student.department != null && student.department.id == 1}">Computer Science</option>
+        <option value="2" th:selected="${student.department != null && student.department.id == 2}">Information Technology</option>
+        <option value="3" th:selected="${student.department != null && student.department.id == 3}">AI & ML</option>
+        <option value="4" th:selected="${student.department != null && student.department.id == 4}">Electronic and Communication</option>
+        <option value="5" th:selected="${student.department != null && student.department.id == 5}">Mechanical Engineering</option>
+    </select>
+</div>
+                    
+                    <div class="input-group">
+                        <label>FeeStatus</label>
+                        <select th:field="*{feeStatus}">
+                            <option value="PAID">PAID</option>
+                             <option value="PENDING">PENDING</option>
+                        </select>
+                    </div>
+                    
+                    
+                    <div class="input-group">
+                        <label>Year</label>
+                        <select th:field="*{year}">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Changes ✅</button>
+                    <a th:href="@{/admin/students}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

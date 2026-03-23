@@ -87,13 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return true;
     }
 
-    @Override
-    public void registerUser(User user) {
-        user.setRole("STUDENT");
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypt
-        user.setStatus("PENDING");
-        userRepository.save(user);
-    }
+   
 
     @Override
     public void approveUser(Long userId) {
@@ -130,10 +124,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     
     @Transactional
     public void activateAndAssign(Long userId, String rollNumber, String deptCode, String courseCode, 
-                                 String year, String empId, String desig, String qual, String phone) {
+                                 String year, String empId, String desig, String qual, String phone , String assignedSubjects, String assignedSection) {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));
         
+        System.out.println(assignedSubjects);
         user.setStatus("ACTIVE");
         user.setEnabled(true); // Ensure they can log in now
 
@@ -161,7 +156,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             t.setDesignation(desig);
             t.setQualification(qual);
             t.setPhoneNumber(phone);
-            
+            t.setAssignedSubjects(assignedSubjects);
+            t.setAssignedSection(assignedSection);
             // If you updated TeacherDetails to use the Department Entity:
             Department dept = deptRepo.findByDeptCode(deptCode)
                 .orElseThrow(() -> new RuntimeException("Dept not found"));
@@ -173,6 +169,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         
         userRepository.save(user); // Saves everything due to CascadeType.ALL
     }
+    
+   
+    	@Transactional
+    	public void toggleUserStatus(Long userId) {
+    	    User user = userRepository.findById(userId)
+    	        .orElseThrow(() -> new RuntimeException("User not found"));
+    	    
+    	    if ("ACTIVE".equals(user.getStatus())) {
+    	        user.setStatus("INACTIVE");
+    	        user.setEnabled(false);
+    	    } else {
+    	        user.setStatus("ACTIVE");
+    	        user.setEnabled(true);
+    	    }
+    	    userRepository.save(user);
+    	}
 
 //    @Override
 //    @Transactional

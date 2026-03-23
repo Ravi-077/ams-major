@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Teacher Management</title>
-<link rel="stylesheet" href="/css/teachermanagement.css">
+<link rel="stylesheet" href="/css/studentmanagement.css">
 </head>
 
 <body>
@@ -67,19 +67,31 @@
                     <a th:href="@{/admin/teacher/assign/{id}(id=${teacher.id})}" class="btn-link">
                         <button class="assign">Assign</button>
                     </a>
-                    <a th:href="@{/admin/teacher/edit/{id}(id=${teacher.id})}" class="btn-link">
-                        <button class="edit">Edit</button>
-                    </a>
-                    <form th:action="@{/admin/teacher/deactivate/{id}(id=${teacher.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="deactivate">Deactivate</button>
-                    </form>
+                     <a th:href="@{/admin/teachers/edit/{id}(id=${teacher.id})}"><button class="edit">Edit</button></a>
+                        <a th:href="@{/admin/teachers/view/{id}(id=${teacher.id})}"><button class="view">View</button></a>
+                        
+                    <form th:action="@{/admin/teachers/toggle-status/{id}(id=${teacher.user.id})}" method="post" style="display:inline;">
+        <button th:if="${teacher.user.status == 'ACTIVE'}" 
+                type="submit" class="btn-deactivate" 
+                onclick="return confirm('Deactivate this Teacher?');">
+            Deactivate
+        </button>
+        
+        <button th:if="${teacher.user.status == 'INACTIVE'}" 
+                type="submit" class="btn-activate-green" 
+                onclick="return confirm('Re-activate this Teacher?');">
+            Activate
+        </button>
+    </form>
                 </td>
             </tr>
         </tbody>
     </table>
     
+    
+    
 <div class="home-section">
-    <a th:href="@{/Admindesh}" class="home-btn">
+    <a th:href="@{/admin/dashboard}" class="home-btn">
         <i class="fas fa-home"></i> Go to Home
     </a>
 </div>

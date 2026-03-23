@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Profile | AMS</title>
+    <link rel="stylesheet" th:href="@{/css/admin-desh.css}">
+    <style>
+         
+         body {
+
+    margin: 0;
+
+    font-family: 'Segoe UI', sans-serif;
+
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+
+}
+        .profile-container { padding: 30px; max-width: 1000px; margin: auto; }
+        .profile-header { display: flex; align-items: center; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .profile-pic { width: 100px; height: 100px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-right: 20px; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .info-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .info-card h3 { color: #2563eb; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px; }
+        .data-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .label { font-weight: bold; color: #64748b; }
+        .value { color: #1e293b; }
+        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .status-active { background: #dcfce7; color: #166534; }
+        .status-inactive { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <a th:href="@{/admin/students}" class="btn-tab" style="text-decoration: none; margin-bottom: 20px; display: inline-block;">← Back to List</a>
+        
+        <div class="profile-header">
+            <div class="profile-pic">👨‍🎓</div>
+            <div>
+                <h1 th:text="${student.user.name}">Student Name</h1>
+                <p class="value">Roll Number: <span th:text="${student.rollNumber ?: 'Not Assigned'}"></span></p>
+                <span th:class="${student.user.status == 'ACTIVE' ? 'status-badge status-active' : 'status-badge status-inactive'}"
+                      th:text="${student.user.status}"></span>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="info-card">
+                <h3>Academic Details</h3>
+                <div class="data-row"><span class="label">Department</span><span class="value" th:text="${student.department?.name ?: 'N/A'}"></span></div>
+                <div class="data-row"><span class="label">Course</span><span class="value" th:text="${student.course?.name ?: 'N/A'}"></span></div>
+                <div class="data-row"><span class="label">Current Year</span><span class="value" th:text="${student.year ?: 'N/A'}"></span></div>
+                <div class="data-row"><span class="label">Fee Status</span><span class="value" th:text="${student.feeStatus ?: 'Pending'}"></span></div>
+            </div>
+
+            <div class="info-card">
+                <h3>Contact Information</h3>
+                <div class="data-row"><span class="label">Email</span><span class="value" th:text="${student.user.email}"></span></div>
+                <div class="data-row"><span class="label">Phone</span><span class="value">Add Phone Field</span></div>
+                <div class="data-row"><span class="label">Gender</span><span class="value">Add Gender Field</span></div>
+            </div>
+
+            <div class="info-card">
+                <h3>Guardian Details</h3>
+                <div class="data-row"><span class="label">Father's Name</span><span class="value">Update Entity Later</span></div>
+                <div class="data-row"><span class="label">Emergency Contact</span><span class="value">Update Entity Later</span></div>
+            </div>
+            
+            
+
+            <div class="info-card">
+                <h3>Academic Performance</h3>
+                <div class="data-row"><span class="label">CGPA</span><span class="value">-- / 10.0</span></div>
+                <div class="data-row"><span class="label">Attendance</span><span class="value">-- %</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

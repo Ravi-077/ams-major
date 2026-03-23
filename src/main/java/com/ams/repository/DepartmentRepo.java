@@ -11,4 +11,5 @@ import com.ams.model.Department;
 public interface DepartmentRepo  extends JpaRepository<Department, Long> {
    
 	Optional<Department> findByDeptCode(String deptCode);
+	
 }

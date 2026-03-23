@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/student-edit.css}">
+    <title>Edit Teacher | AMS</title>
+</head>
+<body>
+    <div class="edit-container">
+        <div class="edit-card">
+            <h2>Edit Teacher Profile</h2>
+            <hr>
+            <form th:action="@{/teachers/update}" th:object="${teacher}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Email (Primary ID)</label>
+                        <input type="text" th:field="*{user.email}" readonly class="readonly-field">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Id No.</label>
+                        <input type="text" th:field="*{id}" readonly class="readonly-field">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" th:field="*{user.name}" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label> Assigned-Section</label>
+                        <input type="text" th:field="*{assignedSection}" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Designation</label>
+                        <input type="text" th:field="*{designation}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mobile Number</label>
+                        <input type="text" th:field="*{phoneNumber}">
+                    </div>
+                    
+                    
+     <div class="input-group">
+    <label>Department</label>
+    <select name="department.id" required class="form-control">
+        <option value="" th:selected="${teacher.department == null}" disabled>-- Select Department --</option>
+        <option th:each="dept : ${departments}" 
+                th:value="${dept.id}" 
+                th:text="${dept.name}"
+                th:selected="${teacher.department != null && teacher.department.id == dept.id}">
+        </option>
+    </select>
+</div>             
+                            
+                    <div class="form-group">
+    <label class="assign-label">Update Assigned Subject:</label>
+    <select name="assignedSubjects" class="form-control" th:field="*{assignedSubjects}">
+        <option value="Java" th:selected="${teacher.assignedSubjects == 'Java'}">Java Programming</option>
+        <option value="Computer Network" th:selected="${teacher.assignedSubjects == 'Computer Network'}">Computer Network</option>
+        <option value="Operating System" th:selected="${teacher.assignedSubjects == 'Operating System'}">Operating System</option>
+        <option value="OOPM" th:selected="${teacher.assignedSubjects == 'OOPM'}">OOPM</option>
+        <option value="Theory Of Computation" th:selected="${teacher.assignedSubjects == 'Theory Of Computation'}">Theory Of Computation</option>
+        <option value="Database Management System" th:selected="${teacher.assignedSubjects == 'Database Management System'}">Database Management System</option>
+        <option value="DataStructure & Algorithm" th:selected="${teacher.assignedSubjects == 'DataStructure & Algorithm'}">DataStructure & Algorithm</option>
+     </select>
+</div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Changes ✅</button>
+                    <a th:href="@{/admin/teachers}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

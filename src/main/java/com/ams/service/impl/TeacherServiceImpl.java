@@ -18,4 +18,24 @@ public class TeacherServiceImpl implements TeacherService {
     public List<TeacherDetails> getAllTeachers() {
         return teacherRepository.findAllWithUser();
     }
+    
+    @Override
+    public long getTotalTeacherCount() {
+        return teacherRepository.count(); //"SELECT COUNT(*) FROM Teacher table"
+    
+        
+    }
+    
+    @Override
+    public TeacherDetails getById(long id)
+    {
+    	return teacherRepository.findById(id).orElse(null);
+    }
+    
+    @Override
+    public void saveTeacher(TeacherDetails teacher)
+    {
+    	 teacherRepository.save(teacher);
+    }
+
 }

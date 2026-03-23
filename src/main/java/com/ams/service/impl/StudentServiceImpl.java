@@ -40,4 +40,9 @@ public class StudentServiceImpl implements StudentService {
     {
     	return studentRepository.findByUserEmail(email);
     }
+    
+    @Override
+    public long getTotalStudentCount() {
+        return studentRepository.count(); //"SELECT COUNT(*) FROM students table"
+    }
 }

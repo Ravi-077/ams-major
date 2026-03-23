@@ -27,8 +27,18 @@ public class TeacherDetails {
     private String phoneNumber;
     private LocalDate joiningDate;
     private String status;
+    private String assignedSection;
+    private String gender;
     
-    @ManyToOne
+    public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "dept_id") // Links to the departments table
     private Department department;
 
@@ -68,7 +78,16 @@ public class TeacherDetails {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+    
+	
 
+	public String getAssignedSection() {
+		return assignedSection;
+	}
+
+	public void setAssignedSection(String assignedSection) {
+		this.assignedSection = assignedSection;
+	}
 
 	public String getEmployeeId() {
 		return employeeId;

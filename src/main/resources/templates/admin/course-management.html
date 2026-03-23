@@ -49,7 +49,7 @@
             </thead>
             <tbody>
                 <tr th:each="course : ${courses}">
-                    <td th:text="${course.code}">BTECH-CS</td>
+                    <td th:text="${course.courseCode}">BTECH-CS</td>
                     <td th:text="${course.name}">B.Tech Computer Science</td>
                     <td th:text="${course.duration}">4 Years</td>
                     <td th:text="${course.totalSubjects}">32</td>
@@ -73,7 +73,7 @@
     </div>
     
 <div class="home-section">
-   <a th:href="@{/Admindesh}" class="home-btn">
+   <a th:href="@{/admin/dashboard}" class="home-btn">
         <i class="fas fa-home"></i> Go to Home
     </a>
 </div>

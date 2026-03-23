@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Login</title>
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -25,14 +25,10 @@
 
             <h2>Login</h2>
             
-            <div th:if="${param.pending}" class="alert-pending">
-                <i class="fas fa-info-circle"></i> 
-                <span>"Registration Successful! Your account is awaiting admin review. We will notify you via email as soon as your profile is active."</span>
-            </div>
-            
            
-
-            <form th:action="@{/login}" method="post" >
+            
+         
+           <form th:action="@{/admin/login/process}" method="post">
 
                 <div class="input-group">
                     <label>Email</label>
@@ -62,9 +58,7 @@ function togglePassword() {
         passField.type = "password";
     }
 }
-
-
-</script>
+</script></script>
 
                 <!-- <button type="submit" class="login-btn">
                     Login
@@ -72,9 +66,7 @@ function togglePassword() {
                 <button type="submit" class="login-btn">Login</button>
             </form>
             <br>
-            <div class="register-link">
-                <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
-            </div>
+            
            
         </div>
 
@@ -82,8 +74,8 @@ function togglePassword() {
 
 </div>
 
-
 </body>
+
 <script>
     // Wait for the page to load
     window.onload = function() {
@@ -125,4 +117,5 @@ function togglePassword() {
         }, 3000);
     }
 </script>
+
 </html>

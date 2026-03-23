@@ -249,15 +249,17 @@ tr:nth-child(even) {
 
 
 
-.deactivate {
+.btn-deactivate {
 
     background: #e74c3c;
 
     color: white;
 
     border: none;
-
+    
     padding: 6px 10px;
+    
+    margin-top:4px;
 
     border-radius: 4px;
 
@@ -293,33 +295,59 @@ tr:nth-child(even) {
 
 }
 
+.btn-activate-green {
+    background-color: #28a745; /* Success Green */
+    color: white;
+    margin-top:4px;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-activate-green:hover {
+    background-color: #218838;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-deactivate:hover {
+    background-color:rgb(213, 0, 5) ;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 
 
 .active-page {
 
     background: #00c6ff;
-
+   
     color: white;
 
-}   This is the css
+}   
 
-/* Ensure the links don't change the button appearance */
 td a {
     text-decoration: none;
     display: inline-block;
 }
 
-/* Ensure buttons take full width of the link for a better click area */
-.edit, .view, .deactivate {
+
+.edit, .view, .btn-deactivate {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
-/* Optional: Add a subtle hover effect to make it feel premium */
-.edit:hover, .view:hover, .deactivate:hover {
+
+.edit:hover, .view:hover:hover {
     transform: translateY(-2px);
     opacity: 0.9;
 }
+
+.btn-deactivate:hover, .btn-activate-green:hover:hover {
+    transform: translateY(+2px);
+    opacity: 0.9;
+}
+
 
 
 .home-section {
@@ -339,4 +367,47 @@ td a {
 .home-btn:hover {
     background: #4e73df;
     color: white;
+}
+
+/* Container link styling to ensure button behavior */
+.btn-link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* The Assign Button */
+button.assign {
+    background-color: #4f46e5; /* Modern Indigo/Blue */
+    color: white;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+button.assign:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+
+button.assign:active {
+    transform: translateY(0);
+    background-color: #3730a3;
+}
+
+/* Optional: Icon Support */
+/* If you add an icon later (like a plus or a book), this keeps it aligned */
+button.assign::before {
+    content: '\271A'; /* Unicode for a small plus (+) sign */
+    font-size: 10px;
 }

@@ -1,6 +1,7 @@
 package com.ams.model;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +28,12 @@ public class StudentDetails {
     private Integer midMarks = 0;
     private Integer assignments = 0;
     private String grade = "N/A";
+    private String fatherName;
+    private String motherName;
+    private String mobileNumber;
+    private String gender;
+    private String dob; 
+    private String address;
     
     @OneToOne
     @JoinColumn(name = "user_id") // Links to the 'id' column in your 'users' table
@@ -40,6 +47,54 @@ public class StudentDetails {
     @ManyToOne
     @JoinColumn(name = "course_id") // Links to the courses table
     private Course course;
+    
+    public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getRollNumber() {
 		return rollNumber;
@@ -79,8 +134,8 @@ public class StudentDetails {
 	    return department;
 	}
 
-	public void setDepartment(Department department) {
-	    this.department = department;
+	public void setDepartment(Department dept) {
+	    this.department = dept;
 	}
 
 	

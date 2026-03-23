@@ -33,5 +33,10 @@ public class LoginController {
        {
     	   return "StudentDashboard";
        }
+       
+       @GetMapping("/admin/login")
+       public String showAdminLoginPage() {
+           return "admin/admin-login";
+       }
 	
 }
